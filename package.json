@@ -4,7 +4,11 @@
   "version": "0.1.0",
   "author": {},
   "dependencies": {
-    "thinkjs": "*"
+    "cheerio": "^0.19.0",
+    "iconv-lite": "^0.4.11",
+    "request": "^2.61.0",
+    "thinkjs": "*",
+    "url": "^0.10.3"
   },
   "keywords": [],
   "repository": {
