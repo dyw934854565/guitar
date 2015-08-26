@@ -33,8 +33,7 @@ module.exports = Controller("Home/BaseController", function(){
 	        	var $element = $(element);
 	        	if($element.find('.icon').length) {
 		        	var type = $($element.find('.icon')[0]).html();
-			        console.log(type);
-			        if (type != "GTP") {
+			        if (type == "六线") {
 			        	items.push({
 				          title: $element.find('.subject').find('a').html(),
 				          href: url.resolve(host, $element.find('.subject').find('a').attr('href'))
@@ -42,6 +41,7 @@ module.exports = Controller("Home/BaseController", function(){
 			        };
 		    	}
 	        });
+	        fs.writeFileSync('./url.txt', JSON.stringify(items));
 	        self.assign('items', items);
 	        return self.display();
 			// fs.writeFile(, function() {
