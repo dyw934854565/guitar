@@ -20,16 +20,13 @@ emitter.on('finished', function(){
 
 fs.readFile('./withPic.txt', 'utf8', function(err, dat) {
 	data = JSON.parse(dat);
-	console.log(data.length);
 
-	for (; index < 2; index++) {
-		var picArr = data[i].picArr;
-		var path = mkdir();
+	for (; index < data.length; index++) {
+		var picArr = data[index].picArr;
+		var path = mkdir(data[index].title);
 		for (var k=0; k<picArr.length; k++) {
 			if (picArr[k].path == '') {
-				console.log(k, picArr[k].src, data[i].title);
-
-				download(inde, k, picArr[k].src, data[i].href, path + picArr[k].src.substr(picArr[k].src.lastIndexOf('/')));
+				download(index, k, picArr[k].src, data[index].href, path + picArr[k].src.substr(picArr[k].src.lastIndexOf('/')));
 			};
 		}
 	};
@@ -38,11 +35,13 @@ fs.readFile('./withPic.txt', 'utf8', function(err, dat) {
 
 
 
-function mkdir() {
+function mkdir(name) {
   	var dir = date + randomString(8);
+  	dir = name || dir;
 	var path = 'picture/' + dir;
 	while(true) {
 		if (fs.existsSync(path)) {
+			return path;
 			dir = date + randomString(8);
 			path = 'picture/' + dir;
 		} else {
@@ -61,7 +60,6 @@ function download(index, k, url, referer, path) {
 			}
 		}).pipe(fs.createWriteStream(path));
 		data[index].picArr[k].path = path;
-		console.log(data[index]);
 	} catch (e) {
 		console.log(e);
 		download(index, k, url, referer, path);
