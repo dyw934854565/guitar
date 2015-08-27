@@ -13,11 +13,11 @@ var arrNone = [];
 var errCount = 0;
 var nowcount = 0;
 emitter.on('finished', function(){
-	console.log('err ',errCount,'success ',successCount);
+	console.log('err ',errCount,'success ',arr.length, ' ',arrNone.length);
 	console.log(arr.sort());
 	fs.writeFileSync('./url.txt', JSON.stringify(items));
 })
-var i = 200;
+var i = 0;
 var makeUrl = function (i) {
 	return host + '/pu_list_0_' + i + '_0_5_8.htm';
 }
