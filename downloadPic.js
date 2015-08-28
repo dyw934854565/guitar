@@ -6,8 +6,7 @@ var url = require('url');
 var emitter = require('events').EventEmitter;
 var emitter = new emitter();
 
-var date = new Date();
-date = '' + date.getFullYear() + (date.getMonth() + 1) + date.getDay();
+
 
 var data;
 var now = 0;
@@ -15,7 +14,7 @@ var index = 0;
 
 emitter.on('finished', function(){
 	console.log('writefile');
-	fs.writeFileSync('./withPic.txt', JSON.stringify(data));
+	fs.writeFileSync('./withPath.txt', JSON.stringify(data));
 })
 
 fs.readFile('./withPic.txt', 'utf8', function(err, dat) {
@@ -35,34 +34,55 @@ fs.readFile('./withPic.txt', 'utf8', function(err, dat) {
 
 
 
-function mkdir(name) {
-  	var dir = date + randomString(8);
-  	dir = name || dir;
+function mkdir(dir) {
+	var date = new Date();
+	date = '' + date.getFullYear() + (date.getMonth() + 1) + date.getDay();
+
+
+  	var dir = dir || date + randomString(8);
 	var path = 'picture/' + dir;
 	while(true) {
 		if (fs.existsSync(path)) {
-			return path;
+			if(arguments.length) {
+				return path;
+			}
 			dir = date + randomString(8);
 			path = 'picture/' + dir;
 		} else {
-			fs.mkdirSync(path)
+			fs.mkdirSync(path);
 			break;
 		}
 	}
 	return path;
 }
-function download(index, k, url, referer, path) {
+function download(a, i) {
+	now++;
+	console.log('try ', a, now);
 	try{
 		request({
 			url: url,
 			headers: {
 				Referer: referer
+			},
+			encoding: null
+		}, function(err, res, body) {
+			now--;
+			if (err) {
+				console.log('fail ', a, now);
+				download(a, i, url, referer, path);
+			} else {
+				console.log('success ', a, now);
+			    data[a].picArr[i].path = path;
+
+			    fs.writeFile(path, body);
+			    if (now ==0 && index == data.length ) {
+			    	emitter.emit('finished');
+			    };
 			}
-		}).pipe(fs.createWriteStream(path));
-		data[index].picArr[k].path = path;
+		});
 	} catch (e) {
 		console.log(e);
-		download(index, k, url, referer, path);
+		download(a, i, url, referer, path);
 	}
 }
 function randomString(len) {

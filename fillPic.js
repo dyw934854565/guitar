@@ -25,20 +25,71 @@ emitter.on('finished', function(){
 	fs.writeFileSync('./withPic.txt', JSON.stringify(data));
 })
 
-
 fs.readFile('./withPic.txt', 'utf8', function(err, dat) {
 	data = JSON.parse(dat);
 	console.log(data.length);
 
-	for (; i < data.length; i++) {
-		if('picArr' in data[i]) {
+	// for (; i < data.length; i++) {
+		// if('picArr' in data[i]) {
+		// 	var picArr = data[i].picArr;
 
-		} else {
-			console.log(i, data[i].href, data[i].title);
-			getPic(i, data[i].href);
+		// 	for (var k = picArr.length - 1; k >= 0; k--) {
+		// 		try {
+		// 			picArr[k].src.substr();
+		// 		} catch (e) {
+		// 			console.log(e);
+		// 			console.log(k, data[i].title, picArr[k].src);
+		// 			data.splice(i,1);
+		// 		}
+		// 	};
+		// } else {
+
+		// 	// console.log(i, data[i].href, data[i].title);
+		// 	// getPic(i, data[i].href);
+		// }
+	// };
+		for (; i < data.length; i++) {
+			var title = data[i].title;
+			data[i].title = toLegal(title);
 		}
-	};
+	emitter.emit('finished');
 });
+
+function toLegal (str) {
+	str = str.replace(/\?/g, '');
+	str = str.replace(/\s/g, '');
+	str = str.replace(/\"/g, '');
+	str = str.replace(/\|/g, '');
+	str = str.replace(/\</g, '');
+	str = str.replace(/\>/g, '');
+	str = str.replace(/\:/g, '');
+	str = str.replace(/\*/g, '');
+	str = str.replace(/\//g, '');
+	str = str.replace(/\\/g, '');
+	str = str.replace(/\《/g, '');
+	str = str.replace(/\》/g, '');
+	str = str.replace(/\（/g, '');
+	str = str.replace(/\）/g, '');
+	str = str.replace(/\(/g, '');
+	str = str.replace(/\)/g, '');
+	str = str.replace(/\【/g, '');
+	str = str.replace(/\】/g, '');
+	str = str.replace(/\./g, '');
+	return str;
+}
+// fs.readFile('./withPic.txt', 'utf8', function(err, dat) {
+// 	data = JSON.parse(dat);
+// 	console.log(data.length);
+
+// 	for (; i < data.length; i++) {
+// 		if('picArr' in data[i]) {
+
+// 		} else {
+// 			console.log(i, data[i].href, data[i].title);
+// 			getPic(i, data[i].href);
+// 		}
+// 	};
+// });
 
 function getPic(index, href) {
 	now++;
