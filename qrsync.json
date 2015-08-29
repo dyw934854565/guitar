@@ -1,0 +1,5 @@
+﻿{
+    "src": "E:/guitar/picture",
+    "dest": "qiniu:access_key=GVGCMU9XjwlVtdrgpOgN751kB8a7W5yWVeMQNfuv&secret_key=YSEG6Qco6QwjOWtG8a62BYEekX7A82Y2aaqf2qqW&bucket=guitar-chords",
+    "debug_level": 1
+}

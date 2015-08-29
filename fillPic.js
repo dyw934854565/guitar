@@ -24,7 +24,7 @@ emitter.on('finished', function(){
 	console.log('writefile');
 	fs.writeFileSync('./withPic.txt', JSON.stringify(data));
 })
-
+var count = 0;
 fs.readFile('./withPic.txt', 'utf8', function(err, dat) {
 	data = JSON.parse(dat);
 	console.log(data.length);
@@ -49,10 +49,12 @@ fs.readFile('./withPic.txt', 'utf8', function(err, dat) {
 		// }
 	// };
 		for (; i < data.length; i++) {
-			var title = data[i].title;
-			data[i].title = toLegal(title);
+			// var title = data[i].title;
+			// data[i].title = toLegal(title);
+			count +=data[i].picArr.length;
 		}
-	emitter.emit('finished');
+		console.log(count);
+	// emitter.emit('finished');
 });
 
 function toLegal (str) {
@@ -75,6 +77,7 @@ function toLegal (str) {
 	str = str.replace(/\【/g, '');
 	str = str.replace(/\】/g, '');
 	str = str.replace(/\./g, '');
+	str = str.replace(/\'/g, '&#39;');
 	return str;
 }
 // fs.readFile('./withPic.txt', 'utf8', function(err, dat) {
