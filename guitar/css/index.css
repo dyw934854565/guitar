@@ -1,4 +1,34 @@
+#find_tip {
+  margin-top: 200px;
+  text-align: center;
+}
+
+.play {
+	overflow: hidden;
+	position: relative;
+}
 .search_wrap .search_input {
 	width: 100%;
 	height: 60px;
+}
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.search_res_ul .pu {
+	width: 100%;
+}
+/*.search_res_ul .pu_wrap .pu_nav {
+	float: left;
+	white-space: nowrap;
+}
+.search_res_ul .pu_nav li {
+	width: 300px;
+	display: inline-block;
+}*/
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
 }

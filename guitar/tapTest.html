@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<!-- <a id='tap' style="display:block;height:100px;width:100px;background-color:red;">
+		
+	</a> -->
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript">
+	// $('#tap').on('singleTap', function() {
+	// 	document.write('singleTap');
+	// });
+	// $('#tap').on('tap', function() {
+	// 	document.write('tap');
+	// });
+	// $('#tap').on('click', function() {
+	// 	document.write('click');
+	// });
+	// $('#tap').on('doubleTap', function() {
+	// 	document.write('doubleTap');
+	// });
+	// "18883288073" && alert('18883288073');
+	// $('#tap').on('tap', function() {
+	// 	"18883288073" && (location.href = "tel:18883288073");
+	// });
+	$(function() {
+		function orientationChange(ev) {
+			for (var i in ev) {
+				document.write(i + '</br>');
+			}
+		    switch(ev.orientation) { 
+		    　　case 0:  
+		            alert("肖像模式 0,screen-width: " + screen.width + "; screen-height:" + screen.height); 
+		            break; 
+		    　　case -90:  
+		            alert("左旋 -90,screen-width: " + screen.width + "; screen-height:" + screen.height); 
+		            break; 
+		    　　case 90:    
+		            alert("右旋 90,screen-width: " + screen.width + "; screen-height:" + screen.height); 
+		            break; 
+		    　　case 180:    
+		        　　alert("风景模式 180,screen-width: " + screen.width + "; screen-height:" + screen.height); 
+		        　　break; 
+		    }};
+
+		var evt = "onorientationchange" in window ? "orientationchange" : "resize";
+        document.write(evt);
+		window.addEventListener(evt, function(ev) {
+			document.write('abc');
+		    orientationChange(ev);
+		}, false);
+		// if ( window.onorientationchange ) {
+		// 	window.onorientationchange = orientationChange;
+		// 	document.write('has');
+		// } else {
+		// 	document.write('no');
+		// }
+	})
+	</script>
+</body>
+</html>

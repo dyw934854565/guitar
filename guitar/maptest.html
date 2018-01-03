@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>map</title>
+	<style type="text/css">
+		html,body {
+			height: 100%;
+			width: 100%;
+		}
+		#test {
+			width: 50%;
+			height: 50%;
+		}
+	</style>
+</head>
+<body>
+	<div id="test"></div>
+	<input type="text" id="su" />
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=F8d6ef1de8f1a3670a0c43cf3a1d893b"></script>
+	<script type="text/javascript">
+	$(function() {
+		var map = new BMap.Map("test");  // 创建Map实例
+        map.centerAndZoom('江西',17);      // 初始化地图,用城市名设置地图中心点
+        var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+			{"input" : "su"
+			,"location" : map
+		});
+		var local = new BMap.LocalSearch(map, {
+			renderOptions:{map: map}
+		});
+		
+	});
+	</script>
+</body>
+</html>
